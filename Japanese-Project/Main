@@ -1,0 +1,99 @@
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.IO;
+
+
+namespace RandomJapanese{
+
+	class Program
+	
+	{
+		
+		
+		public static void Main(){
+			
+			//creates main form for all widgets to exist
+			Form mainWindow = new Form();
+			
+			
+			//The place holder for new Japanese word
+			Label word = new Label(){
+				Text = "Press Button!",
+				Font = new Font("Arial", 24,FontStyle.Bold),
+				AutoSize = true,
+				TextAlign = ContentAlignment.MiddleCenter,
+				Location = new Point(50,50),
+				Dock = DockStyle.None,
+				Width = mainWindow.Width -10
+			
+			};
+			
+			//create button that will allow user to randomly get Japanese Word
+			Button btnRandom = new Button(){
+				
+				Text = "Random Button",
+				Location = new Point(50,100),
+			
+			};
+			
+			//sets the width of the Random Button based on Text Length
+			btnRandom.Width = btnRandom.Text.Length*10;
+				
+			//sets the click event for btnRandom
+			btnRandom.Click += (o, s) =>
+            {
+				string path = "P:\\MichaelC\\C#\\Random Japanese\\words.csv";
+				string[] lines = System.IO.File.ReadAllLines(path);
+			
+				Random r = new Random();
+				int rInt = r.Next(0, 3);
+				word.Text = lines[rInt]+" "+rInt.ToString();
+			
+					//foreach(string line in lines)
+					//{
+					//	string[] columns = line.Split(',');
+					//	foreach (string column in columns) {
+					//		Console.WriteLine(column);
+					//	}
+					//};
+
+            };
+			
+			mainWindow.Controls.Add(btnRandom);
+			mainWindow.Controls.Add(word);
+			
+			mainWindow.ShowDialog();
+			
+			
+		}
+		
+	
+		
+		
+		
+		
+		
+		
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
